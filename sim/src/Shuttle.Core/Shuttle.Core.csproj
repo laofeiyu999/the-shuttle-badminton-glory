@@ -1,0 +1,7 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- 确定性核心逻辑：不依赖任何引擎，netstandard2.1 可直接放进 Unity。运行时禁止浮点。 -->
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <RootNamespace>Shuttle.Core</RootNamespace>
+  </PropertyGroup>
+</Project>

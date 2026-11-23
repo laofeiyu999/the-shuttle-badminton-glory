@@ -1,0 +1,121 @@
+{
+ "_note": "与游戏共用的外置配置（设计文档 V1.5 第 16 章）。长度 cm，比例写小数，由加载器转 Q16。",
+ "tick": {
+  "logicHz": 60
+ },
+ "court": {
+  "singlesHalfWidth": 260,
+  "doublesHalfWidth": 305,
+  "halfLength": 670,
+  "frontServiceLine": 190
+ },
+ "net": {
+  "height": 150,
+  "whiteClearMargin": 8
+ },
+ "chargeTier": [
+  {
+   "name": "白",
+   "fromTick": 0,
+   "durationMul": 1,
+   "gather": 0,
+   "apexMul": 1,
+   "recoveryExtra": 0
+  },
+  {
+   "name": "黄",
+   "fromTick": 36,
+   "durationMul": 0.88,
+   "gather": 50,
+   "apexMul": 0.92,
+   "recoveryExtra": 3
+  },
+  {
+   "name": "橙",
+   "fromTick": 54,
+   "durationMul": 0.8,
+   "gather": 80,
+   "apexMul": 0.84,
+   "recoveryExtra": 6
+  },
+  {
+   "name": "红",
+   "fromTick": 72,
+   "durationMul": 0.74,
+   "gather": 100,
+   "apexMul": 0.76,
+   "recoveryExtra": 9
+  }
+ ],
+ "swing": {
+  "hitFrameOffsetGround": 6,
+  "hitFrameOffsetJump": 12,
+  "maxChargeTicks": 72
+ },
+ "trajectory": {
+  "easeK": 1.6,
+  "rhoDrop": 0.35,
+  "rhoHigh": 0.4,
+  "rhoFlat": 0.2,
+  "downPressBMax": 2,
+  "minDurationTicks": 21,
+  "displaySpeedFactor": 7.2
+ },
+ "quality": {
+  "perfect": 1,
+  "stride": 1.04,
+  "strideGatherDrop": 30,
+  "badBase": 1.3,
+  "badSpan": 0.2,
+  "badApexBase": 40,
+  "badApexSpan": 20,
+  "badLateral": 80
+ },
+ "netLift": {
+  "drop": [
+   0,
+   30,
+   15,
+   0
+  ],
+  "flat": [
+   0,
+   20,
+   10,
+   0
+  ]
+ },
+ "lane": {
+  "midBad": 80
+ },
+ "depthGroups": {
+  "网前": [
+   150,
+   50
+  ],
+  "前场吊": [
+   220,
+   120
+  ],
+  "腰线": [
+   300,
+   200
+  ],
+  "中场平": [
+   450,
+   550
+  ],
+  "杀球": [
+   350,
+   500
+  ],
+  "后场": [
+   520,
+   660
+  ]
+ },
+ "offset": {
+  "K": 0.6,
+  "Km": 0.25
+ }
+}

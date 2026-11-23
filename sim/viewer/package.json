@@ -1,0 +1,11 @@
+{
+ "name": "shuttle-viewer",
+ "private": true,
+ "type": "module",
+ "scripts": {
+  "start": "node serve.mjs"
+ },
+ "dependencies": {
+  "three": "0.187.0"
+ }
+}

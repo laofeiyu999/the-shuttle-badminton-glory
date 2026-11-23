@@ -1,0 +1,203 @@
+{
+ "_note": "动作弹道参数（第 6.1、6.3.3、6.5.3 节）。placeholder=true 表示文档未给白档顶点，为仿真占位值，待用户拍板。",
+ "actions": [
+  {
+   "id": "Q05",
+   "name": "搓球",
+   "family": "Drop",
+   "baseTicks": 54,
+   "apexWhite": 165,
+   "hnWhite": 0,
+   "kill": false,
+   "depthGroup": "网前",
+   "placeholder": false
+  },
+  {
+   "id": "Q04",
+   "name": "放网",
+   "family": "Drop",
+   "baseTicks": 54,
+   "apexWhite": 180,
+   "hnWhite": 0,
+   "kill": false,
+   "depthGroup": "网前",
+   "placeholder": false
+  },
+  {
+   "id": "Q07",
+   "name": "拨腰",
+   "family": "Drop",
+   "baseTicks": 48,
+   "apexWhite": 200,
+   "hnWhite": 0,
+   "kill": false,
+   "depthGroup": "腰线",
+   "placeholder": true
+  },
+  {
+   "id": "Q01",
+   "name": "收吊",
+   "family": "Drop",
+   "baseTicks": 69,
+   "apexWhite": 275,
+   "hnWhite": 0,
+   "kill": false,
+   "depthGroup": "前场吊",
+   "placeholder": false
+  },
+  {
+   "id": "Q02",
+   "name": "劈吊",
+   "family": "Drop",
+   "baseTicks": 60,
+   "apexWhite": 265,
+   "hnWhite": 0,
+   "kill": false,
+   "depthGroup": "前场吊",
+   "placeholder": false
+  },
+  {
+   "id": "Q03",
+   "name": "滑板吊",
+   "family": "Drop",
+   "baseTicks": 63,
+   "apexWhite": 260,
+   "hnWhite": 0,
+   "kill": false,
+   "depthGroup": "腰线",
+   "placeholder": false
+  },
+  {
+   "id": "Z01",
+   "name": "挡网",
+   "family": "Flat",
+   "baseTicks": 51,
+   "apexWhite": 170,
+   "hnWhite": 0,
+   "kill": false,
+   "depthGroup": "网前",
+   "placeholder": true
+  },
+  {
+   "id": "Z02",
+   "name": "推球",
+   "family": "Flat",
+   "baseTicks": 42,
+   "apexWhite": 230,
+   "hnWhite": 0,
+   "kill": false,
+   "depthGroup": "中场平",
+   "placeholder": true
+  },
+  {
+   "id": "Z03",
+   "name": "扑杀",
+   "family": "Flat",
+   "baseTicks": 30,
+   "apexWhite": 0,
+   "hnWhite": 175,
+   "kill": true,
+   "depthGroup": "杀球",
+   "placeholder": false
+  },
+  {
+   "id": "Z04",
+   "name": "平抽",
+   "family": "Flat",
+   "baseTicks": 45,
+   "apexWhite": 200,
+   "hnWhite": 0,
+   "kill": false,
+   "depthGroup": "中场平",
+   "placeholder": true
+  },
+  {
+   "id": "Z07",
+   "name": "硬压拦截",
+   "family": "Flat",
+   "baseTicks": 39,
+   "apexWhite": 0,
+   "hnWhite": 175,
+   "kill": true,
+   "depthGroup": "杀球",
+   "placeholder": false
+  },
+  {
+   "id": "Z08",
+   "name": "点杀",
+   "family": "Flat",
+   "baseTicks": 45,
+   "apexWhite": 0,
+   "hnWhite": 185,
+   "kill": true,
+   "depthGroup": "杀球",
+   "placeholder": false
+  },
+  {
+   "id": "Z09",
+   "name": "重杀",
+   "family": "Flat",
+   "baseTicks": 48,
+   "apexWhite": 0,
+   "hnWhite": 180,
+   "kill": true,
+   "depthGroup": "杀球",
+   "placeholder": false
+  },
+  {
+   "id": "Z10",
+   "name": "跳杀",
+   "family": "Flat",
+   "baseTicks": 48,
+   "apexWhite": 0,
+   "hnWhite": 180,
+   "kill": true,
+   "depthGroup": "杀球",
+   "placeholder": false
+  },
+  {
+   "id": "T01",
+   "name": "挑高",
+   "family": "High",
+   "baseTicks": 111,
+   "apexWhite": 480,
+   "hnWhite": 0,
+   "kill": false,
+   "depthGroup": "后场",
+   "placeholder": false
+  },
+  {
+   "id": "T02",
+   "name": "推挑",
+   "family": "High",
+   "baseTicks": 84,
+   "apexWhite": 380,
+   "hnWhite": 0,
+   "kill": false,
+   "depthGroup": "后场",
+   "placeholder": true
+  },
+  {
+   "id": "T03",
+   "name": "高远",
+   "family": "High",
+   "baseTicks": 117,
+   "apexWhite": 560,
+   "hnWhite": 0,
+   "kill": false,
+   "depthGroup": "后场",
+   "placeholder": false
+  },
+  {
+   "id": "T05",
+   "name": "平高",
+   "family": "High",
+   "baseTicks": 78,
+   "apexWhite": 430,
+   "hnWhite": 0,
+   "kill": false,
+   "depthGroup": "后场",
+   "placeholder": false
+  }
+ ]
+}

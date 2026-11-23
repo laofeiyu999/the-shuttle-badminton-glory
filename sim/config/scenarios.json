@@ -1,0 +1,260 @@
+{
+ "_note": "仿真批量组合的代表站位（仿真专用，不进游戏）。distance=击球点到网的纵向距离 cm；h0=触点高度 cm；actions 按白黄橙红四档取第 9.2 节主表动作。",
+ "badU": 0.5,
+ "ground": [
+  {
+   "zone": "前场",
+   "distance": 120,
+   "family": "Drop",
+   "h0": 140,
+   "actions": [
+    "Q05",
+    "Q04",
+    "Q07",
+    "Q07"
+   ]
+  },
+  {
+   "zone": "前场",
+   "distance": 120,
+   "family": "Flat",
+   "h0": 200,
+   "actions": [
+    "Z01",
+    "Z02",
+    "Z03",
+    "Z03"
+   ]
+  },
+  {
+   "zone": "前场",
+   "distance": 120,
+   "family": "High",
+   "h0": 140,
+   "actions": [
+    "T01",
+    "T01",
+    "T02",
+    "T02"
+   ]
+  },
+  {
+   "zone": "中场",
+   "distance": 350,
+   "family": "Drop",
+   "h0": 230,
+   "actions": [
+    "Q01",
+    "Q02",
+    "Q02",
+    "Q03"
+   ]
+  },
+  {
+   "zone": "中场",
+   "distance": 350,
+   "family": "Flat",
+   "h0": 230,
+   "actions": [
+    "Z08",
+    "Z08",
+    "Z09",
+    "Z09"
+   ]
+  },
+  {
+   "zone": "中场",
+   "distance": 350,
+   "family": "High",
+   "h0": 230,
+   "actions": [
+    "T03",
+    "T03",
+    "T05",
+    "T05"
+   ]
+  },
+  {
+   "zone": "后场",
+   "distance": 600,
+   "family": "Drop",
+   "h0": 230,
+   "actions": [
+    "Q01",
+    "Q02",
+    "Q02",
+    "Q03"
+   ]
+  },
+  {
+   "zone": "后场",
+   "distance": 600,
+   "family": "Flat",
+   "h0": 230,
+   "actions": [
+    "Z08",
+    "Z08",
+    "Z09",
+    "Z09"
+   ]
+  },
+  {
+   "zone": "后场",
+   "distance": 600,
+   "family": "High",
+   "h0": 230,
+   "actions": [
+    "T03",
+    "T03",
+    "T05",
+    "T05"
+   ]
+  }
+ ],
+ "jump": [
+  {
+   "zone": "中场",
+   "distance": 350,
+   "family": "Drop",
+   "h0": 290,
+   "actions": [
+    "Q01",
+    "Q02",
+    "Q02",
+    "Q03"
+   ],
+   "label": "起跳"
+  },
+  {
+   "zone": "中场",
+   "distance": 350,
+   "family": "Flat",
+   "h0": 290,
+   "actions": [
+    "Z08",
+    "Z08",
+    "Z09",
+    "Z10"
+   ],
+   "label": "起跳"
+  },
+  {
+   "zone": "中场",
+   "distance": 350,
+   "family": "High",
+   "h0": 290,
+   "actions": [
+    "T03",
+    "T03",
+    "T05",
+    "T05"
+   ],
+   "label": "起跳"
+  },
+  {
+   "zone": "后场",
+   "distance": 600,
+   "family": "Drop",
+   "h0": 290,
+   "actions": [
+    "Q01",
+    "Q02",
+    "Q02",
+    "Q03"
+   ],
+   "label": "起跳"
+  },
+  {
+   "zone": "后场",
+   "distance": 600,
+   "family": "Flat",
+   "h0": 290,
+   "actions": [
+    "Z08",
+    "Z08",
+    "Z09",
+    "Z10"
+   ],
+   "label": "起跳"
+  },
+  {
+   "zone": "后场",
+   "distance": 600,
+   "family": "High",
+   "h0": 290,
+   "actions": [
+    "T03",
+    "T03",
+    "T05",
+    "T05"
+   ],
+   "label": "起跳"
+  },
+  {
+   "zone": "前场",
+   "distance": 120,
+   "family": "Flat",
+   "h0": 270,
+   "tiers": [
+    2,
+    3
+   ],
+   "actions": [
+    "",
+    "",
+    "Z03",
+    "Z03"
+   ],
+   "label": "起跳扑杀"
+  },
+  {
+   "zone": "前中场",
+   "distance": 235,
+   "family": "Flat",
+   "h0": 270,
+   "tiers": [
+    2,
+    3
+   ],
+   "actions": [
+    "",
+    "",
+    "Z03",
+    "Z03"
+   ],
+   "label": "起跳扑杀"
+  },
+  {
+   "zone": "前中场",
+   "distance": 235,
+   "family": "Flat",
+   "h0": 280,
+   "tiers": [
+    3
+   ],
+   "actions": [
+    "",
+    "",
+    "",
+    "Z10"
+   ],
+   "label": "反手跳杀"
+  },
+  {
+   "zone": "中场",
+   "distance": 350,
+   "family": "Flat",
+   "h0": 280,
+   "tiers": [
+    3
+   ],
+   "actions": [
+    "",
+    "",
+    "",
+    "Z10"
+   ],
+   "label": "反手跳杀"
+  }
+ ]
+}

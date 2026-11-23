@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><title>荣耀-羽毛球竞技 · 弹道仿真查看器</title>
+<style>
+ html,body{margin:0;height:100%;background:#1b1f24;color:#e8e8e8;font:13px "Microsoft YaHei",sans-serif;overflow:hidden}
+ #ui{position:absolute;left:0;top:0;bottom:0;width:330px;background:#22272ecc;padding:10px;box-sizing:border-box;overflow:auto}
+ #ui select,#ui button{font:inherit;margin:2px 0}
+ label{display:inline-block;width:52px;color:#9aa}
+ #list{height:260px;width:100%;background:#15191e;color:#ddd;border:1px solid #333}
+ #info{white-space:pre-wrap;line-height:1.5;margin-top:8px;color:#cfd}
+ #hud{position:absolute;right:12px;top:10px;text-align:right;color:#fff;text-shadow:0 0 3px #000}
+ .views button{width:23%}
+</style>
+<script type="importmap">{"imports":{"three":"./node_modules/three/build/three.module.js","three/addons/":"./node_modules/three/examples/jsm/"}}</script>
+</head><body>
+<div id="ui">
+ <div><b>弹道仿真查看器</b>（数据：sim/out/trajectories.json）</div>
+ <div><label>组</label><select id="fGroup"><option value="">全部</option><option>地面</option><option>起跳</option></select></div>
+ <div><label>场区</label><select id="fZone"><option value="">全部</option><option>前场</option><option>前中场</option><option>中场</option><option>后场</option></select></div>
+ <div><label>蓄力档</label><select id="fTier"><option value="">全部</option><option>白</option><option>黄</option><option>橙</option><option>红</option></select></div>
+ <div><label>质量</label><select id="fQual"><option value="">全部</option><option>完美</option><option>跨步</option><option>糟糕</option></select></div>
+ <div><label>线路</label><select id="fLane"><option value="">全部</option><option>左</option><option>中</option><option>右</option></select></div>
+ <select id="list" size="14"></select>
+ <div><button id="play">播放</button> <button id="step">逐 tick</button> <button id="all">叠加当前筛选</button>
+  速度 <select id="speed"><option>0.25</option><option>0.5</option><option selected>1</option><option>2</option></select></div>
+ <div class="views">视角：<br><button data-v="game">实战</button><button data-v="free">自由360°</button><button data-v="side">侧视</button><button data-v="top">俯视</button><button data-v="recv">接球方</button></div>
+ <div id="info"></div>
+</div>
+<div id="hud"></div>
+<script type="module" src="./main.js"></script>
+</body></html>
