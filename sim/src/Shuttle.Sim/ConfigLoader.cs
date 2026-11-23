@@ -68,6 +68,23 @@ namespace Shuttle.Sim
             }
             return c;
         }
+        public static CameraConfig LoadCamera(string dir)
+        {
+            var cam = JsonDocument.Parse(File.ReadAllText(Path.Combine(dir, "core.json"))).RootElement.GetProperty("camera");
+            var cc = new CameraConfig();
+            var zl = new List<CamZone>();
+            foreach (var z in cam.GetProperty("zones").EnumerateArray()) zl.Add(new CamZone { D = z.GetProperty("d").GetInt32(), Height = z.GetProperty("height").GetInt32(), Back = z.GetProperty("back").GetInt32(), LookAhead = z.GetProperty("lookAhead").GetInt32(), Fov = z.GetProperty("fov").GetInt32() });
+            cc.Zones = zl.ToArray();
+            cc.DampQ = Q(cam.GetProperty("damp").GetDouble()); cc.LateralQ = Q(cam.GetProperty("lateral").GetDouble());
+            cc.GroupQ = Q(cam.GetProperty("group").GetDouble()); cc.JumpFollowQ = Q(cam.GetProperty("jumpFollow").GetDouble());
+            var w = cam.GetProperty("weights"); cc.WOwn = w.GetProperty("own").GetInt32(); cc.WLand = w.GetProperty("land").GetInt32(); cc.WOpp = w.GetProperty("opp").GetInt32(); cc.WBall = w.GetProperty("ball").GetInt32();
+            return cc;
+        }
+        public static MoveConfig LoadMove(string dir)
+        {
+            var m = JsonDocument.Parse(File.ReadAllText(Path.Combine(dir, "core.json"))).RootElement.GetProperty("movement");
+            return new MoveConfig { Forward = m.GetProperty("forward").GetInt32(), Side = m.GetProperty("side").GetInt32(), Back = m.GetProperty("back").GetInt32(), ReactionTicks = m.GetProperty("reactionTicks").GetInt32(), StopRadius = m.GetProperty("stopRadius").GetInt32() };
+        }
         static int[] Ints(JsonElement e) { var l = new List<int>(); foreach (var x in e.EnumerateArray()) l.Add(x.GetInt32()); return l.ToArray(); }
     }
 }

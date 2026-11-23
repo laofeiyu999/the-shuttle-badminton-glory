@@ -39,6 +39,7 @@ namespace Shuttle.Sim
 
         static int Batch(CoreConfig c, string cfgDir, string outDir)
         {
+            var cc = ConfigLoader.LoadCamera(cfgDir); var mc = ConfigLoader.LoadMove(cfgDir);
             Directory.CreateDirectory(outDir);
             var sc = JsonDocument.Parse(File.ReadAllText(Path.Combine(cfgDir, "scenarios.json"))).RootElement;
             int badU = (int)Math.Round(sc.GetProperty("badU").GetDouble() * 65536);
@@ -104,6 +105,7 @@ namespace Shuttle.Sim
                     w.WriteNumber("n", r.Res.N); w.WriteBoolean("netHit", r.Res.NetHit); w.WriteNumber("apex", r.Res.ApexActual); w.WriteNumber("netY", r.Res.NetPlaneInterp);
                     w.WriteNumber("receiverCharge", Trajectory.ReceiverMaxCharge(c, r.Res.N)); w.WriteBoolean("placeholder", r.Req.Action.Placeholder);
                     w.WriteStartArray("p"); for (int i = 0; i < r.Res.Ys.Length; i++) { w.WriteNumberValue(r.Res.Xs[i]); w.WriteNumberValue(r.Res.Ys[i]); w.WriteNumberValue(r.Res.Zs[i]); } w.WriteEndArray();
+                    Scene.Write(w, c, cc, mc, r.Req, r.Res, r.Group == "jump");
                     w.WriteEndObject();
                 }
                 w.WriteEndArray(); w.WriteEndObject();

@@ -117,5 +117,56 @@
  "offset": {
   "K": 0.6,
   "Km": 0.25
+ },
+ "movement": {
+  "_note": "第 5.8 节：前/左/右 380、后 310 cm/s，椭圆合成，无加速度",
+  "forward": 380,
+  "side": 380,
+  "back": 310,
+  "reactionTicks": 15,
+  "stopRadius": 25
+ },
+ "camera": {
+  "_note": "实战视角（10.7.2）。zones 按本方人物到网距离 d(cm) 线性插值：height 机位离地、back 机位到注视点的水平距离、lookAhead 注视点在人物前方距离、fov 垂直视场角(度)。初值按飞羽实机四张片区截图（前场/中场/中后场/后场）投影拟合：网带、对方底线、本方人物、本方底线在画面中的位置。damp 每 tick 跟随系数；lateral 横向跟随；group 目标组拉动；jumpFollow 起跳高度跟随。全部待调。",
+  "zones": [
+   {
+    "d": 120,
+    "height": 375,
+    "back": 850,
+    "lookAhead": 175,
+    "fov": 40
+   },
+   {
+    "d": 330,
+    "height": 560,
+    "back": 1150,
+    "lookAhead": 200,
+    "fov": 40
+   },
+   {
+    "d": 480,
+    "height": 560,
+    "back": 1250,
+    "lookAhead": 380,
+    "fov": 44
+   },
+   {
+    "d": 600,
+    "height": 550,
+    "back": 1300,
+    "lookAhead": 500,
+    "fov": 48
+   }
+  ],
+  "damp": 0.18,
+  "lateral": 0.5,
+  "group": 0.1,
+  "jumpFollow": 0.25,
+  "weights": {
+   "own": 4,
+   "land": 3,
+   "opp": 2,
+   "ball": 1
+  }
  }
 }

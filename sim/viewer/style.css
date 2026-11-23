@@ -1,0 +1,108 @@
+
+:root{--u:min(1vh,0.5625vw)}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;overflow:hidden;background:#15181d;font-family:"Microsoft YaHei","PingFang SC",sans-serif;color:#eef3fb;user-select:none}
+#gl{position:fixed;inset:0;width:100%;height:100%;display:block}
+#edge{position:fixed;inset:0;pointer-events:none;box-shadow:inset 0 0 0 0 rgba(255,40,40,0);transition:box-shadow .12s}
+#edge.flash{box-shadow:inset 0 0 calc(var(--u)*10) calc(var(--u)*3) rgba(255,40,40,.75)}
+#hud{position:fixed;inset:0;pointer-events:none}
+/* 计分板 */
+.score{position:absolute;left:calc(var(--u)*3);top:calc(var(--u)*3)}
+.score .row{display:flex;align-items:stretch;height:calc(var(--u)*7.2);filter:drop-shadow(0 2px 6px rgba(0,0,0,.45))}
+.score .row.me{background:linear-gradient(90deg,rgba(40,110,230,.92),rgba(40,110,230,.55) 85%,transparent)}
+.score .row.op{background:linear-gradient(90deg,rgba(220,55,60,.92),rgba(220,55,60,.55) 85%,transparent)}
+.score .avatar{width:calc(var(--u)*9);display:flex;align-items:center;justify-content:center;font-size:calc(var(--u)*2.1);background:rgba(255,255,255,.16);border-right:2px solid rgba(255,255,255,.35)}
+.score .cell{width:calc(var(--u)*7);transform:skewX(-18deg);border-right:2px solid rgba(255,255,255,.35);display:flex;align-items:center;justify-content:center;font:italic 700 calc(var(--u)*3.8)/1 "Segoe UI",sans-serif}
+.score .cell.pts{color:#fff}
+.score .serve{align-self:center;margin-left:calc(var(--u)*1.2);color:#ffe36a;font-size:calc(var(--u)*1.8)}
+.score .status{height:calc(var(--u)*3.6);display:flex;align-items:center;gap:calc(var(--u)*.8);padding-left:calc(var(--u)*.6)}
+.score .arrow{font-size:calc(var(--u)*1.5);color:#cfe0ff;border:1px solid rgba(255,255,255,.5);padding:0 3px;border-radius:2px;background:rgba(0,0,0,.25)}
+.score .tags span{font-size:calc(var(--u)*1.7);padding:1px 8px;border-radius:3px;margin-right:4px}
+.tag-awake{background:linear-gradient(90deg,#ffb52e,#ffd96b);color:#3a2300}
+.tag-tired{background:#a82a2a;color:#fff}
+/* 系统栏 */
+.sys{position:absolute;right:calc(var(--u)*3);top:calc(var(--u)*3);padding:calc(var(--u)*.8) calc(var(--u)*1.6);background:rgba(10,16,28,.45);border:1px solid rgba(255,255,255,.18);border-radius:6px;min-width:calc(var(--u)*26)}
+.sysrow{display:flex;align-items:center;justify-content:space-between;gap:calc(var(--u)*1.6);font:600 calc(var(--u)*2.8)/1.2 "Segoe UI",sans-serif}
+.sysrow.small{font-size:calc(var(--u)*1.6);opacity:.85;margin-top:2px}
+.wifi{width:calc(var(--u)*3.2)} .gear{width:calc(var(--u)*3.6)}
+/* 摇杆 */
+.stick{position:absolute;left:calc(var(--u)*8);bottom:calc(var(--u)*7);width:calc(var(--u)*26);height:calc(var(--u)*26);border-radius:50%;
+ background:radial-gradient(circle,rgba(255,255,255,.10),rgba(255,255,255,.04) 65%,rgba(255,255,255,.0) 70%);border:2px solid rgba(255,255,255,.45);box-shadow:0 0 calc(var(--u)*2) rgba(120,200,255,.25) inset}
+.knob{position:absolute;left:50%;top:50%;width:calc(var(--u)*10);height:calc(var(--u)*10);margin:calc(var(--u)*-5) 0 0 calc(var(--u)*-5);border-radius:50%;
+ background:radial-gradient(circle at 40% 35%,#ffffff,#cfe6ff 45%,#7fb4ea);box-shadow:0 2px 10px rgba(0,0,0,.45);opacity:.9}
+/* 体力 / 意志 */
+.bars{position:absolute;left:50%;bottom:calc(var(--u)*3.2);transform:translateX(-50%);width:calc(var(--u)*46)}
+.stamina{height:calc(var(--u)*2.2);border:1.5px solid rgba(255,255,255,.75);border-radius:3px;background:rgba(0,0,0,.35);overflow:hidden}
+.stamina.warn{animation:warn .66s 3}
+@keyframes warn{50%{border-color:#ff3030;box-shadow:0 0 10px #ff3030}}
+.stamina i{display:block;height:100%;width:100%;background:repeating-linear-gradient(-45deg,#3fe0a0 0 6px,#2bc487 6px 12px);transition:width .4s}
+.will{height:calc(var(--u)*.9);margin-top:calc(var(--u)*.8);background:rgba(0,0,0,.35);border:1px solid rgba(255,220,120,.5);border-radius:2px;overflow:hidden}
+.will i{display:block;height:100%;width:40%;background:linear-gradient(90deg,#ffb52e,#ffd96b)}
+.barlbl{display:flex;justify-content:space-between;font-size:calc(var(--u)*1.4);opacity:.6;margin-top:2px}
+/* 按键 */
+.btn{position:absolute;border-radius:50%}
+.btn svg{position:absolute;inset:-8%;width:116%;height:116%;transform:rotate(-90deg);overflow:visible}
+.btn .face{position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle at 50% 38%,rgba(255,255,255,.42),rgba(230,236,245,.22) 60%,rgba(200,210,225,.16));
+ border:2px solid rgba(255,255,255,.65);box-shadow:0 3px 12px rgba(0,0,0,.35),inset 0 0 12px rgba(255,255,255,.25);display:flex;flex-direction:column;align-items:center;justify-content:center;transition:transform .08s,background .08s}
+.btn .face b{font-size:calc(var(--u)*3);letter-spacing:1px;text-shadow:0 1px 4px rgba(0,0,0,.6)}
+.btn .face em{font-style:normal;font-size:calc(var(--u)*1.6);opacity:.85;text-shadow:0 1px 3px rgba(0,0,0,.6)}
+.btn .lbl{position:absolute;left:50%;bottom:calc(var(--u)*-3.6);transform:translateX(-50%);white-space:nowrap;font-size:calc(var(--u)*1.9);text-shadow:0 1px 4px rgba(0,0,0,.8)}
+.btn.press .face{background:radial-gradient(circle at 50% 38%,rgba(255,255,255,.55),rgba(190,200,215,.4) 60%,rgba(160,170,190,.35))}
+.btn.buzz .face{animation:buzz .12s linear}
+@keyframes buzz{25%{transform:translate(2px,-1px)}50%{transform:translate(-2px,1px)}75%{transform:translate(1px,2px)}}
+.btn.release .face{box-shadow:0 0 20px 6px rgba(255,255,255,.9)}
+.btn .seg{fill:none;stroke-width:7;stroke-linecap:butt}
+.btn .base{fill:none;stroke:rgba(255,255,255,.22);stroke-width:7}
+.btn .tick{stroke:rgba(20,30,45,.8);stroke-width:2}
+#bDrop{right:calc(var(--u)*30);bottom:calc(var(--u)*6);width:calc(var(--u)*16);height:calc(var(--u)*16)}
+#bFlat{right:calc(var(--u)*8);bottom:calc(var(--u)*6);width:calc(var(--u)*16);height:calc(var(--u)*16)}
+#bHigh{right:calc(var(--u)*7);bottom:calc(var(--u)*29);width:calc(var(--u)*16);height:calc(var(--u)*16)}
+#bAwake{right:calc(var(--u)*8);bottom:calc(var(--u)*52);width:calc(var(--u)*12);height:calc(var(--u)*12)}
+#bAwake .face{background:radial-gradient(circle,rgba(255,240,200,.30),rgba(255,210,120,.12));border-color:rgba(255,215,120,.8)}
+#bAwake .face b{font-size:calc(var(--u)*2.6);color:#ffe8b0}
+#bAwake .track{fill:none;stroke:rgba(255,255,255,.18);stroke-width:6}
+#bAwake .remain{fill:none;stroke:#3a2a12;stroke-width:6;stroke-dasharray:0 999;opacity:.85}
+#bAwake.on .face{box-shadow:0 0 18px 6px rgba(255,200,61,.75);animation:breath 0.83s ease-in-out infinite}
+@keyframes breath{50%{box-shadow:0 0 30px 10px rgba(255,200,61,.95)}}
+#tag{position:absolute;transform:translate(-50%,-50%);font:900 calc(var(--u)*3.4)/1 "Microsoft YaHei";padding:calc(var(--u)*.6) calc(var(--u)*2.2);color:#fff;opacity:0;
+ clip-path:polygon(4% 0,100% 0,96% 100%,0 100%);letter-spacing:4px;text-shadow:0 2px 4px rgba(0,0,0,.5)}
+/* 工具层 */
+#tool{position:fixed;top:calc(var(--u)*2.4);left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:6px;z-index:5}
+#tool .views,#tool .transport{display:flex;gap:2px;padding:4px;border-radius:10px;background:rgba(14,20,32,.72);border:1px solid rgba(255,255,255,.12);backdrop-filter:blur(8px);box-shadow:0 4px 16px rgba(0,0,0,.35)}
+#tool button,#tool select,#panel select{font:inherit;font-size:13px;color:#dfe8f5;background:transparent;border:0;padding:5px 11px;border-radius:7px;cursor:pointer}
+#tool button:hover{background:rgba(255,255,255,.08)}
+#tool button.on{background:linear-gradient(180deg,#3d8bff,#2a6be0);color:#fff}
+#tool select,#panel select{background:rgba(255,255,255,.07)}
+#tool option,#panel option{background:#1b2230}
+#scrub{width:260px;accent-color:#3d8bff;align-self:center}
+#tickLbl{min-width:84px;font:12px Consolas,monospace;align-self:center;opacity:.8;text-align:right}
+#panel{position:fixed;left:0;top:calc(var(--u)*24);bottom:calc(var(--u)*36);width:330px;transform:translateX(-340px);transition:transform .25s;z-index:4;
+ background:rgba(14,20,32,.82);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.1);border-left:0;border-radius:0 12px 12px 0;padding:12px 14px;display:flex;flex-direction:column;gap:8px;box-shadow:4px 0 24px rgba(0,0,0,.4)}
+#panel.open{transform:none}
+#panel h3{margin:0;font-size:15px}#panel h3 small{font-weight:400;opacity:.55;font-size:11px;margin-left:6px}
+.filters{display:flex;flex-wrap:wrap;gap:4px}.filters select{padding:4px 6px}
+#list{flex:1;overflow:auto;border-radius:8px;background:rgba(0,0,0,.25);font-size:12.5px;min-height:80px}
+#list div{padding:5px 9px;cursor:pointer;border-bottom:1px solid rgba(255,255,255,.04);display:flex;gap:6px;align-items:center}
+#list div:hover{background:rgba(255,255,255,.06)}#list div.sel{background:rgba(61,139,255,.35)}
+#list .dot{width:8px;height:8px;border-radius:50%;flex:none}
+#list .badge{margin-left:auto;font-size:10.5px;padding:0 5px;border-radius:3px;background:rgba(255,80,80,.3)}
+#list .ph{background:rgba(255,200,0,.25)}
+#info{font-size:12.5px;line-height:1.65;background:rgba(0,0,0,.22);border-radius:8px;padding:8px 10px;white-space:pre-wrap;color:#cfe3ff}
+.chk{font-size:12.5px;opacity:.85;display:flex;gap:6px;align-items:center}
+.hint{font-size:11px;opacity:.45}
+
+.btn.window .face{box-shadow:0 0 0 2px rgba(255,255,255,.75),0 3px 12px rgba(0,0,0,.35),inset 0 0 12px rgba(255,255,255,.25)}
+.btn.lock .face{border-color:#ff8a1f;box-shadow:0 0 0 2px rgba(255,138,31,.6),0 0 16px rgba(255,120,31,.7)}
+#ballArrow{position:fixed;width:0;height:0;border-left:12px solid transparent;border-right:12px solid transparent;border-bottom:22px solid #ffffff;filter:drop-shadow(0 0 6px #7fd8ff);display:none;pointer-events:none}
+#ballArrow span{position:absolute;top:24px;left:-24px;width:48px;text-align:center;font:600 12px Consolas;color:#fff}
+.pop{position:fixed;pointer-events:none;transform:translate(-50%,-50%);font:italic 900 22px "Segoe UI";color:#fff;text-shadow:0 0 8px #ff2e2e,0 2px 3px #000}
+.qtag{position:fixed;pointer-events:none;transform:translate(-50%,-50%) skewX(-12deg);font:900 26px "Microsoft YaHei";color:#fff;padding:3px 18px 3px 14px;letter-spacing:6px;
+ text-shadow:0 2px 3px rgba(0,0,0,.45);clip-path:inset(0 0 0 0)}
+.qtag.perfect{background:linear-gradient(90deg,rgba(255,32,32,0),#ff2020 18%,#e01010 82%,rgba(255,32,32,0))}
+.qtag.bad{background:linear-gradient(90deg,rgba(154,154,154,0),#9a9a9a 18%,#808080 82%,rgba(154,154,154,0))}
+#legend{position:fixed;right:calc(var(--u)*3);top:calc(var(--u)*13);font-size:12px;line-height:1.7;background:rgba(10,16,28,.45);border:1px solid rgba(255,255,255,.12);border-radius:6px;padding:6px 10px;opacity:.9}
+#legend i{display:inline-block;width:18px;height:4px;margin-right:6px;vertical-align:middle;border-radius:2px}
+
+.btn .face svg.ico{position:static;inset:auto;transform:none;width:40%;height:auto;margin-bottom:2px;filter:drop-shadow(0 1px 2px rgba(0,0,0,.6))}
+.btn .face b{font-size:calc(var(--u)*2.4)}
+#info{max-height:34vh;overflow:auto;word-break:break-all}

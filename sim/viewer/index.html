@@ -1,30 +1,61 @@
 <!doctype html>
-<html lang="zh-CN"><head><meta charset="utf-8"><title>荣耀-羽毛球竞技 · 弹道仿真查看器</title>
-<style>
- html,body{margin:0;height:100%;background:#1b1f24;color:#e8e8e8;font:13px "Microsoft YaHei",sans-serif;overflow:hidden}
- #ui{position:absolute;left:0;top:0;bottom:0;width:330px;background:#22272ecc;padding:10px;box-sizing:border-box;overflow:auto}
- #ui select,#ui button{font:inherit;margin:2px 0}
- label{display:inline-block;width:52px;color:#9aa}
- #list{height:260px;width:100%;background:#15191e;color:#ddd;border:1px solid #333}
- #info{white-space:pre-wrap;line-height:1.5;margin-top:8px;color:#cfd}
- #hud{position:absolute;right:12px;top:10px;text-align:right;color:#fff;text-shadow:0 0 3px #000}
- .views button{width:23%}
-</style>
+<html lang="zh-CN"><head><meta charset="utf-8"><title>荣耀-羽毛球竞技 · 弹道仿真</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="./style.css">
 <script type="importmap">{"imports":{"three":"./node_modules/three/build/three.module.js","three/addons/":"./node_modules/three/examples/jsm/"}}</script>
 </head><body>
-<div id="ui">
- <div><b>弹道仿真查看器</b>（数据：sim/out/trajectories.json）</div>
- <div><label>组</label><select id="fGroup"><option value="">全部</option><option>地面</option><option>起跳</option></select></div>
- <div><label>场区</label><select id="fZone"><option value="">全部</option><option>前场</option><option>前中场</option><option>中场</option><option>后场</option></select></div>
- <div><label>蓄力档</label><select id="fTier"><option value="">全部</option><option>白</option><option>黄</option><option>橙</option><option>红</option></select></div>
- <div><label>质量</label><select id="fQual"><option value="">全部</option><option>完美</option><option>跨步</option><option>糟糕</option></select></div>
- <div><label>线路</label><select id="fLane"><option value="">全部</option><option>左</option><option>中</option><option>右</option></select></div>
- <select id="list" size="14"></select>
- <div><button id="play">播放</button> <button id="step">逐 tick</button> <button id="all">叠加当前筛选</button>
-  速度 <select id="speed"><option>0.25</option><option>0.5</option><option selected>1</option><option>2</option></select></div>
- <div class="views">视角：<br><button data-v="game">实战</button><button data-v="free">自由360°</button><button data-v="side">侧视</button><button data-v="top">俯视</button><button data-v="recv">接球方</button></div>
- <div id="info"></div>
+<canvas id="gl"></canvas>
+<div id="edge"></div>
+
+<!-- ===== 游戏实战 HUD（按手绘界面图） ===== -->
+<div id="hud">
+ <div class="score">
+  <div class="row me"><div class="avatar">我方</div><div class="cell pts" id="sMe">0</div><div class="cell"></div><div class="cell"></div><div class="serve" id="serveMe">●</div></div>
+  <div class="status" id="statusMe"><span class="arrow">▲</span><span class="tags" id="tagsMe"></span></div>
+  <div class="row op"><div class="avatar">敌方</div><div class="cell pts" id="sOp">0</div><div class="cell"></div><div class="cell"></div></div>
+  <div class="status"><span class="arrow">▼</span></div>
+ </div>
+ <div class="sys">
+  <div class="sysrow"><span id="clock">00:00</span>
+   <svg class="wifi" viewBox="0 0 24 18"><path d="M12 16.5l2.2-2.6a3.2 3.2 0 0 0-4.4 0z" fill="#7dffa6"/><path d="M5.6 9.8a9 9 0 0 1 12.8 0l-1.8 2a6.4 6.4 0 0 0-9.2 0z" fill="#7dffa6"/><path d="M1.6 5.6a14.6 14.6 0 0 1 20.8 0l-1.8 2a12 12 0 0 0-17.2 0z" fill="#7dffa6" opacity=".55"/></svg>
+   <svg class="gear" viewBox="0 0 24 24"><path fill="#e9eef7" d="M19.4 13a7.6 7.6 0 0 0 0-2l2.1-1.6-2-3.5-2.5 1a7.4 7.4 0 0 0-1.7-1L15 3.3h-4l-.4 2.6a7.4 7.4 0 0 0-1.7 1l-2.5-1-2 3.5L6.5 11a7.6 7.6 0 0 0 0 2l-2.1 1.6 2 3.5 2.5-1a7.4 7.4 0 0 0 1.7 1l.4 2.6h4l.4-2.6a7.4 7.4 0 0 0 1.7-1l2.5 1 2-3.5zM13 15.5A3.5 3.5 0 1 1 13 8.5a3.5 3.5 0 0 1 0 7z" transform="translate(-1 0)"/></svg></div>
+  <div class="sysrow small"><span>FPS <b id="fps">--</b></span><span>逻辑 <b>60</b> Hz</span></div>
+ </div>
+ <div class="stick"><div class="knob" id="knob"></div></div>
+ <div class="bars"><div class="stamina"><i id="stam"></i></div><div class="will"><i id="will"></i></div><div class="barlbl"><span>体力</span><span>意志</span></div></div>
+ <div class="btn awake" id="bAwake"><svg viewBox="0 0 100 100"><circle class="track" cx="50" cy="50" r="46"/><circle class="remain" id="awRing" cx="50" cy="50" r="46"/></svg><div class="face"><b>觉醒</b></div><div class="lbl">觉醒·爆发</div></div>
+ <div class="btn shot" id="bHigh" data-f="High"></div>
+ <div class="btn shot" id="bDrop" data-f="Drop"></div>
+ <div class="btn shot" id="bFlat" data-f="Flat"></div>
+ <div id="tag"></div>
 </div>
-<div id="hud"></div>
+
+<!-- ===== 仿真工具层 ===== -->
+<div id="tool">
+ <div class="views">
+  <button data-v="game" class="on">实战视角</button><button data-v="free">360° 自由</button><button data-v="side">侧视</button><button data-v="top">俯视</button><button data-v="recv">接球方</button>
+ </div>
+ <div class="transport">
+  <button id="play" title="空格">▶</button><button id="step" title="→">⏭</button>
+  <select id="speed"><option value="0.25">0.25×</option><option value="0.5">0.5×</option><option value="1" selected>1×</option><option value="2">2×</option></select>
+  <input id="scrub" type="range" min="0" max="100" value="0"><span id="tickLbl">0</span>
+  <button id="drawer">☰ 弹道表</button>
+ </div>
+</div>
+<aside id="panel" class="open">
+ <h3>弹道仿真 <small>C# Shuttle.Core 逐 tick 输出</small></h3>
+ <div class="filters">
+  <select id="fGroup"><option value="">全部组</option><option>地面</option><option>起跳</option></select>
+  <select id="fZone"><option value="">全部场区</option><option>前场</option><option>前中场</option><option>中场</option><option>后场</option></select>
+  <select id="fTier"><option value="">全部档</option><option>白</option><option>黄</option><option>橙</option><option>红</option></select>
+  <select id="fQual"><option value="">全部质量</option><option>完美</option><option>跨步</option><option>糟糕</option></select>
+  <select id="fLane"><option value="">全部线路</option><option>左</option><option>中</option><option>右</option></select>
+ </div>
+ <div id="list"></div>
+ <div id="info"></div>
+ <label class="chk"><input type="checkbox" id="optAwake"> 演示觉醒（8 s 剩余时间环）</label>
+ <label class="chk"><input type="checkbox" id="optRanges" checked> 落点三圈（0.60 / 1.20 / 1.80 m）</label>
+ <div class="hint">空格 播放/暂停　→ 逐 tick　Tab 收起面板　V 切换视角</div>
+</aside>
 <script type="module" src="./main.js"></script>
 </body></html>
