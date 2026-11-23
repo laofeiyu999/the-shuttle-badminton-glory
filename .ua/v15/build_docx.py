@@ -1,3 +1,4 @@
+import os
 
 import sys, re, copy
 from docx import Document
@@ -5,7 +6,7 @@ from docx.shared import Pt, Emu
 from docx.oxml.ns import qn
 from docx.oxml import OxmlElement
 
-SRC = r"D:\GameDev\shuttle-storm\Docs\羽毛球大作战_游戏开发设计文档_V1.4(最终版).docx"
+SRC = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "Docs", "羽毛球大作战_游戏开发设计文档_V1.4(最终版).docx")
 md_path, out_path = sys.argv[1], sys.argv[2]
 
 doc = Document(SRC)

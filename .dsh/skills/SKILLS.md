@@ -1,4 +1,4 @@
-# shuttle-storm 项目技能清单（project skills）
+# The Shuttle - Badminton Glory（荣耀羽毛球竞技）项目技能清单（project skills）
 
 本目录是项目级技能根（DSH 发现顺序 rank 100，高于用户级 `~/.dsh/skills` 的 rank 400）。
 技能来源均为公开仓库，逐个核对过 `SKILL.md` 正文，不是只看名字。
@@ -42,4 +42,4 @@
 - `multiplayer-game`：正文要求先读 `BASE_SKILL.md`，且明确只适用于 **RivetKit** 平台，与本项目自研服务端冲突，不安装。
 - `ponytail`：2026-11-05 已删除（项目级与用户级 `~/.dsh/skills` 两处都删）。该技能主张“最小改动优先、能省就省”，会压缩输出与推演长度，与本项目“设计文档要写全、数值要推演到位、口径要逐条对齐”的要求相反，容易导致理解偏差和遗漏。删除后无功能依赖，摘除不影响任何既有流程。
 
-维护说明：升级技能时替换对应目录并同步更新本表；项目专属约定写在 `shuttle-storm-project` 技能里，不直接改第三方 `SKILL.md`。
+维护说明：升级技能时替换对应目录并同步更新本表；项目专属约定写在 `the-shuttle-project` 技能里，不直接改第三方 `SKILL.md`。
