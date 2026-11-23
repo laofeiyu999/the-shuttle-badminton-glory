@@ -43,9 +43,9 @@ scene.add(sun);
 // 球场：蓝色场地 + 绿色可移动区（9.0×16.4）+ 全套白线
 const HW_D = 3.05, HW_S = data.halfWidth / 100, HL = data.halfLength / 100, NET = data.netHeight / 100;
 {
-  const surround = new THREE.Mesh(new THREE.PlaneGeometry(9.0, 16.4), new THREE.MeshStandardMaterial({ color: 0x1f8f68, roughness: .85 }));
+  const surround = new THREE.Mesh(new THREE.PlaneGeometry(9.0, 16.4), new THREE.MeshStandardMaterial({ color: 0x2f62cc, roughness: .85 }));
   surround.rotation.x = -Math.PI / 2; surround.receiveShadow = true; scene.add(surround);
-  const court = new THREE.Mesh(new THREE.PlaneGeometry(HW_D * 2 + 0.04, HL * 2 + 0.04), new THREE.MeshStandardMaterial({ color: 0x2f62cc, roughness: .7 }));
+  const court = new THREE.Mesh(new THREE.PlaneGeometry(HW_D * 2 + 0.04, HL * 2 + 0.04), new THREE.MeshStandardMaterial({ color: 0x1f8f68, roughness: .7 }));
   court.rotation.x = -Math.PI / 2; court.position.y = 0.002; court.receiveShadow = true; scene.add(court);
   const lineMat = new THREE.MeshBasicMaterial({ color: 0xf4f7ff });
   const W = 0.045;
