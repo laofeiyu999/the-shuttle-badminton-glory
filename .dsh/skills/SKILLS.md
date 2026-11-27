@@ -24,6 +24,8 @@
 | `blender-skills` | arjun988/blender-skills | 3D 资产与动画管线（附录 A 相关），自制资产时用 |
 | `higgsfield-game-generation` | higgsfield-ai/skills | 浏览器游戏与素材生成（需 Higgsfield CLI） |
 | `understand-anything` | Donchitos/understand-anything-plugin | 代码库知识图谱与可浏览看板；后续 Unity/C# 工程与 sim 代码的架构梳理 |
+| `watch`（目录 `claude-video-watch`） | bradautomates/claude-video | 看参考视频：yt-dlp 下载 + ffmpeg 抽帧 + 字幕/本地转录，读帧后回答画面问题 |
+| `video-perception`（目录 `claude-video-vision`） | jordanrendric/claude-video-vision | 结构化看片：video_info → video_analyze（场景/静音/运动）→ video_watch 抽帧 → video_detail 钻取；需配套 MCP 服务 |
 
 ## 未复制、但全局可用的内置技能
 
@@ -36,6 +38,9 @@
 - `blender-skills`：咨询型技能包（references/*.md），不驱动 Blender 进程。
 - `higgsfield-game-generation`：需要 Higgsfield CLI 与账号授权。
 - `understand-anything`：已排除 `node_modules/`（496 MB，可重建），首次使用需在该目录执行 `pnpm install && pnpm --filter @understand-anything/core build`。
+- `watch`：需要 `ffmpeg`/`ffprobe`/`yt-dlp` 在 PATH 上（本项目本机已装 ffmpeg 8.1.2 与 yt-dlp 2026.11.23），配置写在 `C:\Users\OVO\.config\watch\.env`；当前为 `engine=local`、`backend=none`（不转录）、`detail=balanced`。调用 `scripts/watch.py` 时必须传**绝对路径**，相对路径会被解析到技能目录下而报找不到文件。要开转录就把 backend 换成 whisperx/groq/openai。
+- `video-perception`：依赖用户级 MCP 服务 `claude-video-vision`（`@deepseek-ai/dsh-mcp-client` 插件，配置在 `C:\Users\OVO\.dsh\profiles\desktop\cordis.patch.yml` 的 insert 段，命令 `D:\nodejs\node.exe` 跑 `C:\Users\OVO\.dsh\mcp\claude-video-vision\node_modules\claude-video-vision\dist\index.js`，超时 600000 ms）。该服务是**用户级**安装，不在本仓库里；换机器需重新 `npm install claude-video-vision@latest` 并加配置行。配置持久化在 `C:\Users\OVO\.claude-video-vision\config.json`，当前 `backend=local`、`whisper_engine=python`、`whisper_model=small`、`frame_mode=images`、`frame_resolution=512`、`max_frames=60`。
+- `video-perception` 的音频链路：走 openai-whisper 的 Python CLI（`D:\TmpProject\miniconda3\Scripts\whisper.exe`，模型缓存在 `C:\Users\OVO\.cache\whisper\small.pt`，340 MB）。whisper.cpp 的 `whisper-cli` 官方无 Windows 预编译包，不要走 cpp 引擎。另有一处**本地补丁**：`dist/backends/local.js` 里 `transcribeWithWhisperPython` 原本只读 stdout，而 openai-whisper 把逐段结果打到 stdout、把真正的 JSON 写到 `<outputDir>/<basename>.json`，导致转录文本带乱码进不了分段；已改为优先读该 JSON 文件（代码里搜 `LOCALPATCH:read-json`）。升级该 npm 包会覆盖掉，升级后需重打。
 
 ## 明确排除
 
