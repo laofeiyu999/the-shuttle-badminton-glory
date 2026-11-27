@@ -17,3 +17,14 @@
 # Python 技能脚本运行时产生的缓存
 __pycache__/
 *.pyc
+
+# 飞羽青春完整实战视频（主视角 217MB、侧视角 450MB，超过 100MB 限制，只存本地）
+/References/游戏详细参考图与视频/飞羽青春/飞羽青春*完整实战视频*.mp4
+
+# 复刻分析工作区：原片硬链接、抽帧、音频、中间缓存只存本地；报告、脚本和 csv 入库
+.ua/replica/src/
+.ua/replica/frames/
+.ua/replica/audio/
+.ua/replica/data/*
+!.ua/replica/data/*.csv
+!.ua/replica/data/*.md
