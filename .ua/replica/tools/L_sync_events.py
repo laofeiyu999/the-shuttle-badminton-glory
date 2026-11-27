@@ -29,7 +29,7 @@ FE = list(csv.DictReader(io.open('data/B2_flash_events.csv', encoding='utf-8-sig
 fs = np.array([float(r['t_start']) for r in FE])
 def match(a, b, lo=-1.0, hi=1.0, tol=0.08):
     res = []
-    for nm, m in (('150 s 前', a < 150), ('150 s 后', a >= 150)):
+    for nm, m in (('142.5 s 前', a < 142.5), ('142.5 s 后', a >= 142.5)):
         best = None
         for o in np.arange(lo, hi, 0.01):
             n = (np.abs((a[m] + o)[:, None] - b[None, :]).min(1) < tol).sum()

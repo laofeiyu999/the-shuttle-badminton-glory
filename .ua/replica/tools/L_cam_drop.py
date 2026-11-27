@@ -9,7 +9,7 @@ import numpy as np
 g = runpy.run_path('tools/L_cam_dyn.py')
 C = g['C']; sel = g['sel']; N = g['N']; DT = g['DT']; own_d = g['own_d']; opp_d = g['opp_d']; lp = g['lp']; reg = g['reg']; num = g['num']
 tm = C['t'][sel]; cz = C['cz'][sel]
-base = np.where(tm < 150, tm + g['SYNC'][0], tm + g['SYNC'][1])
+base = np.where(tm < 142.5, tm + g['SYNC'][0], tm + g['SYNC'][1])
 S = list(csv.DictReader(io.open('data/B_shots.csv', encoding='utf-8-sig')))
 inc = np.zeros(N); out_ = np.zeros(N); flying = np.zeros(N)
 used = 0

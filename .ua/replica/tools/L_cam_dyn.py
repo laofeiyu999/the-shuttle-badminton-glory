@@ -67,7 +67,7 @@ for a, b in RALLY: inr |= (C['t'] >= a) & (C['t'] <= b)
 sel = ok & inr
 tm = C['t'][sel]
 SYNC = (0.015, 0.30)
-ts = np.where(tm < 150, tm + SYNC[0], tm + SYNC[1])
+ts = np.where(tm < 142.5, tm + SYNC[0], tm + SYNC[1])
 ii = np.clip(np.round(ts / DT).astype(int), 0, N - 1)
 cz = C['cz'][sel]; cx = C['cx'][sel]; cy = C['cy'][sel]; fov = C['fov'][sel]; pitch = C['pitch'][sel]
 out = ['# 主视角相机的跟随动态', '', '由 `.ua/replica/tools/L_cam_dyn.py` 生成。回合内样本 %d 个（每 0.1 s 一个，相机解算成功的）。' % sel.sum(), '']
@@ -140,7 +140,7 @@ for off in np.arange(-0.3, 0.41, 0.05):
     jj = np.clip(np.round((ts + off) / DT).astype(int), 0, N - 1)
     out.append('| %+.2f | ' % off + ' | '.join('%.3f' % reg(cx, [lp(own_lat, t)[jj]])[1] for t in (0, 0.1, 0.2, 0.3, 0.5)) + ' |')
 out += ['', '分段各自最好的偏移（tau 0）：', '']
-for nm, m in (('150 s 前', tm < 150), ('150 s 后', tm >= 150)):
+for nm, m in (('142.5 s 前', tm < 142.5), ('142.5 s 后', tm >= 142.5)):
     bb = None
     for off in np.arange(-0.3, 0.41, 0.01):
         jj = np.clip(np.round((ts + off) / DT).astype(int), 0, N - 1)
